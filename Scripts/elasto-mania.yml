@@ -1,0 +1,28 @@
+name: Elasto Mania
+game_slug: elasto-mania
+version: Standalone
+slug: elasto-mania
+runner: wine
+
+script:
+  files:
+  - installer: 'N/A:Select the Setup executable from your CD:'
+  game:
+    arch: win32
+    exe: $GAMEDIR/drive_c/Program Files/ElastoMania/elma.exe
+    prefix: $GAMEDIR
+  installer:
+  - task:
+      arch: win32
+      description: Creating prefix
+      install_mono: false
+      name: create_prefix
+      prefix: $GAMEDIR
+  - task:
+      arch: win32
+      executable: installer
+      name: wineexec
+      prefix: $GAMEDIR
+  - task:
+      name: winekill
+      prefix: $GAMEDIR
