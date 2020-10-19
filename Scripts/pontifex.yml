@@ -1,0 +1,35 @@
+name: Pontifex
+game_slug: pontifex
+version: Standalone
+slug: pontifex
+runner: wine
+
+script:
+  files:
+  - installer: 'N/A:Select the Setup executable from your CD:'
+  game:
+    arch: win32
+    exe: $GAMEDIR/drive_c/Program Files/Pontifex/pontifex.exe
+    prefix: $GAMEDIR
+  installer:
+  - task:
+      arch: win32
+      description: Creating prefix
+      install_mono: false
+      name: create_prefix
+      prefix: $GAMEDIR
+  - task:
+      arch: win32
+      executable: installer
+      name: wineexec
+      prefix: $GAMEDIR
+  - task:
+      name: winekill
+      prefix: $GAMEDIR
+  - task:
+      name: wineexec
+      description: Configuring Pontifex
+      executable: $GAMEDIR/drive_c/Program Files/Pontifex/config.exe
+  - task:
+      name: winekill
+      prefix: $GAMEDIR
