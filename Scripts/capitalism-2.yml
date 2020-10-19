@@ -1,0 +1,40 @@
+name: Capitalism II
+game_slug: capitalism-2
+version: Standalone version
+slug: capitalism-2-standalone
+runner: wine
+
+script:
+  files:
+  - patch: http://enlight.b-cdn.net/cap2/Cap2_v114.zip
+  - installer: 'N/A:Select the Setup executable from your CD:'
+  game:
+    arch: win64
+    exe: $GAMEDIR/$INPUT_EXEDIR/Cap2.exe
+    prefix: $GAMEDIR
+  installer:
+  - input_menu:
+      description: 'Choose the game''s version:'
+      id: EXEDIR
+      options:
+      - /drive_c/Program Files (x86)/Capitalism II: English version
+      - /drive_c/Program Files (x86)/Capitalism II PL: "Polish version (Komputer \u015A\
+          wiat Gry Extra - nr 2/2004)"
+      preselect: /drive_c/Program Files (x86)/Capitalism II
+  - task:
+      arch: win64
+      description: Creating prefix
+      install_mono: false
+      name: create_prefix
+      prefix: $GAMEDIR
+  - task:
+      arch: win64
+      executable: installer
+      name: wineexec
+      prefix: $GAMEDIR
+  - task:
+      name: winekill
+      prefix: $GAMEDIR
+  - extract:
+      dst: $GAMEDIR/$INPUT_EXEDIR/
+      file: patch

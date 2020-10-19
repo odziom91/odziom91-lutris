@@ -1,34 +1,34 @@
 name: Messiah
 game_slug: messiah
-version: Standalone + dgVoodoo
+version: Standalone + dgVoodoo + DXVK
 slug: messiah
 runner: wine
 
 script:
-    files:
-        - installer: 'N/A:Select the Setup executable from your CD:'
-        - dgvoodoo: https://github.com/odziom91/odziom91-lutris/raw/main/dgVoodoo/dgvoodoo2_71_2_glide-x86.zip
-    game:
-        arch: win32
-        exe: $GAMEDIR/drive_c/Program Files/Messiah PL/MessiahGlide3x.exe
-        prefix: $GAMEDIR
-    installer:
-        - task:
-            arch: win32
-            description: Creating prefix
-            install_mono: false
-            name: create_prefix
-            prefix: $GAMEDIR
-        - task:
-            arch: win32
-            executable: installer
-            name: wineexec
-            prefix: $GAMEDIR
-        - task:
-            name: winekill
-            prefix: $GAMEDIR
-        - extract:
-            dst: $GAMEDIR/drive_c/Program Files/Messiah PL/
-            file: dgvoodoo
-    wine:
-        dxvk: false
+  files:
+  - installer: 'N/A:Select the Setup executable from your CD:'
+  - dgvoodoo: https://github.com/odziom91/odziom91-lutris/raw/main/dgVoodoo/dgvoodoo2_71_2_glide-x86.zip
+  game:
+    arch: win32
+    exe: $GAMEDIR/drive_c/Program Files/Messiah PL/MessiahGlide3x.exe
+    prefix: $GAMEDIR
+  installer:
+  - task:
+      arch: win32
+      description: Creating prefix
+      install_mono: false
+      name: create_prefix
+      prefix: $GAMEDIR
+  - task:
+      arch: win32
+      executable: installer
+      name: wineexec
+      prefix: $GAMEDIR
+  - task:
+      name: winekill
+      prefix: $GAMEDIR
+  - extract:
+      dst: $GAMEDIR/drive_c/Program Files/Messiah PL/
+      file: dgvoodoo
+  wine:
+    dxvk: true
