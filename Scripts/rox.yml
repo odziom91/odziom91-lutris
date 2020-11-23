@@ -1,0 +1,33 @@
+name: RoX
+game_slug: rox
+version: Standalone
+slug: rox
+runner: wine
+
+script:
+  files:
+  - installer: 'N/A:Select the Setup executable from your CD:'
+  - dx8vb: https://github.com/odziom91/odziom91-lutris/raw/main/Libraries/dx8vb.dll.zip
+  game:
+    arch: win32
+    exe: $GAMEDIR/drive_c/Program Files/RoX/RoX.exe
+    prefix: $GAMEDIR
+  installer:
+  - task:
+      arch: win32
+      description: Creating prefix
+      install_mono: false
+      name: create_prefix
+      prefix: $GAMEDIR
+  - task:
+      arch: win32
+      executable: installer
+      name: wineexec
+      prefix: $GAMEDIR
+  - task:
+      name: winekill
+      prefix: $GAMEDIR
+  - extract:
+      dst: $GAMEDIR/drive_c/windows/system32
+      file: dx8vb
+  

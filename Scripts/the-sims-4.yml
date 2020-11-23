@@ -1,0 +1,47 @@
+name: The Sims 4
+game_slug: the-sims-4
+version: Standalone
+slug: the-sims-4
+runner: wine
+
+script:
+  files:
+  - setup: N/A:Please select the setup file for The Sims 4
+  game:
+    arch: win64
+    exe: drive_c/Program Files/Electronic Arts/The Sims 4/Game/Bin/TS4_x64.exe
+    prefix: $GAMEDIR
+  installer:
+  - task:
+      description: Creating Wine prefix
+      name: create_prefix
+      prefix: $GAMEDIR
+  - write_file:
+      content: dxgi.nvapiHack = False
+      file: $GAMEDIR/dxvk.conf
+  - task:
+      app: arial cmd d3dcompiler_43 d3dcompiler_47 d3dx9
+      name: winetricks
+      prefix: $GAMEDIR
+  - task:
+      arch: win64
+      description: Installing The Sims 4 from setup...
+      executable: setup
+      name: wineexec
+      prefix: $GAMEDIR
+  - task:
+      name: winekill
+      prefix: $GAMEDIR
+  system:
+    env:
+      DXVK_CONFIG_FILE: $GAMEDIR/dxvk.conf
+      DXVK_STATE_CACHE_PATH: $GAMEDIR/prefix
+      STAGING_SHARED_MEMORY: 0
+      WINE_LARGE_ADDRESS_AWARE: 1
+      __GL_SHADER_DISK_CACHE: 1
+      __GL_SHADER_DISK_CACHE_PATH: $GAMEDIR/prefix
+  wine:
+    dxvk: true
+    esync: true
+    overrides:
+      nvapi,nvapi64: disabled

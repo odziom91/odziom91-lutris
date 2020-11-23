@@ -1,0 +1,10 @@
+name: FUSER
+game_slug: fuser
+version: Standalone
+slug: fuser
+runner: wine
+
+script:
+  files:
+  - setup: N/A:Please select the setup file for FUSER
+  - mfinstaller: 

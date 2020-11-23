@@ -1,0 +1,62 @@
+name: The Sims 3
+game_slug: the-sims-3
+version: Standalone
+slug: the-sims-3
+runner: wine
+
+script:
+  files:
+  - setup: N/A:Please select the setup file for The Sims 3
+  game:
+    arch: win64
+    exe: drive_c/Program Files (x86)/Electronic Arts/The Sims 3/The Sims 3/Game/Bin/TS3W.exe
+    prefix: $GAMEDIR
+  installer:
+  - task:
+      arch: win64
+      description: Creating prefix
+      install_mono: false
+      name: create_prefix
+      prefix: $GAMEDIR/prefix
+  - task:
+      app: dotnet20 d3dcompiler_43 d3dx9
+      arch: win64
+      description: Installing dependencies
+      name: winetricks
+      prefix: $GAMEDIR/prefix
+      silent: true
+  - task:
+      arch: win64
+      description: Setting version to XP for Sims3LauncherW...
+      key: Version
+      name: set_regedit
+      path: HKEY_CURRENT_USER\Software\Wine\AppDefaults\Sims3LauncherW.exe
+      prefix: $GAMEDIR/prefix
+      value: winxp
+  - task:
+      arch: win64
+      description: Setting version to 7 for default...
+      key: Version
+      name: set_regedit
+      path: HKEY_CURRENT_USER\Software\Wine
+      prefix: $GAMEDIR/prefix
+      value: win7
+  - task:
+      arch: win64
+      description: Installing The Sims 3 from setup...
+      executable: setup
+      name: wineexec
+      prefix: $GAMEDIR
+  - task:
+      name: winekill
+      prefix: $GAMEDIR/prefix
+  system:
+    env:
+      DXVK_CONFIG_FILE: $GAMEDIR/dxvk.conf
+      DXVK_STATE_CACHE_PATH: $GAMEDIR/prefix
+      WINE_LARGE_ADDRESS_AWARE: 1
+      __GL_SHADER_DISK_CACHE: 1
+      __GL_SHADER_DISK_CACHE_PATH: $GAMEDIR/prefix
+  wine:
+    dxvk: true
+    esync: true
