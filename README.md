@@ -6,13 +6,13 @@ All required tools, libraries, mods, wallpapers, etc. for Lutris scripts.
 Capitalism II  
 Combat Mission: Beyond Overlord  
 Messiah  
-Elasto-Mania
-Pontifex
-RoX
-Dead or Alive 5 Last Round
-Tekken 7
-The Sims 3
-The Sims 4
+Elasto-Mania  
+Pontifex  
+RoX  
+Dead or Alive 5 Last Round  
+Tekken 7  
+The Sims 3  
+The Sims 4  
 
 ### Garbage scripts [Garbage directory]:
 Dead or Alive 6 - not working at all  
