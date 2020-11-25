@@ -1,31 +1,47 @@
-name: The Sims 4
-game_slug: the-sims-4
+name: FUSER
+game_slug: fuser
 version: Standalone
-slug: the-sims-4
+slug: fuser
 runner: wine
 
 script:
   files:
-  - setup: N/A:Please select the setup file for The Sims 4
+  - setup: N/A:Please select the setup file for FUSER
+  - mfinstaller: https://github.com/z0z0z/mf-install/archive/master.zip
   game:
     arch: win64
-    exe: $GAMEDIR/drive_c/Program Files/Electronic Arts/The Sims 4/Game/Bin/TS4_x64.exe
+    exe: drive_c/fuser.exe
     prefix: $GAMEDIR
   installer:
   - task:
       description: Creating Wine prefix
       name: create_prefix
       prefix: $GAMEDIR
-  - write_file:
-      content: dxgi.nvapiHack = False
-      file: $GAMEDIR/dxvk.conf
   - task:
-      app: arial cmd d3dcompiler_43 d3dcompiler_47 d3dx9
+      name: winekill
+      prefix: $GAMEDIR
+  - extract:
+      dst: $CACHE/mfinstaller
+      file: mfinstaller
+  - chmodx: $CACHE/mfinstaller/mf-install.sh
+  - execute:
+      command: $CACHE/mfinstaller/mf-install.sh
+      env:
+        WINEPREFIX: $GAMEDIR
+      terminal: true
+  - task:
+      name: winekill
+      prefix: $GAMEDIR
+  - task:
+      app: cmd
       name: winetricks
       prefix: $GAMEDIR
   - task:
+      name: winekill
+      prefix: $GAMEDIR
+  - task:
       arch: win64
-      description: Installing The Sims 4 from setup...
+      description: Installing FUSER from setup...
       executable: setup
       name: wineexec
       prefix: $GAMEDIR
@@ -43,5 +59,3 @@ script:
   wine:
     dxvk: true
     esync: true
-    overrides:
-      nvapi,nvapi64: disabled

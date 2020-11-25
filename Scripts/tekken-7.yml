@@ -1,31 +1,28 @@
-name: The Sims 4
-game_slug: the-sims-4
-version: Standalone
-slug: the-sims-4
+name: Tekken 7
+game_slug: tekken-7
+version: Standalone version
+slug: tekken-7
 runner: wine
 
 script:
   files:
-  - setup: N/A:Please select the setup file for The Sims 4
+  - setup: N/A:Please select the setup file for Tekken 7
   game:
     arch: win64
-    exe: $GAMEDIR/drive_c/Program Files/Electronic Arts/The Sims 4/Game/Bin/TS4_x64.exe
+    exe: $GAMEDIR/drive_c/Games/TEKKEN 7/TEKKEN 7.exe
     prefix: $GAMEDIR
   installer:
   - task:
       description: Creating Wine prefix
       name: create_prefix
       prefix: $GAMEDIR
-  - write_file:
-      content: dxgi.nvapiHack = False
-      file: $GAMEDIR/dxvk.conf
   - task:
-      app: arial cmd d3dcompiler_43 d3dcompiler_47 d3dx9
+      app: cmd
       name: winetricks
       prefix: $GAMEDIR
   - task:
       arch: win64
-      description: Installing The Sims 4 from setup...
+      description: Installing Tekken 7 from setup...
       executable: setup
       name: wineexec
       prefix: $GAMEDIR
@@ -33,6 +30,7 @@ script:
       name: winekill
       prefix: $GAMEDIR
   system:
+    pulse_latency: true
     env:
       DXVK_CONFIG_FILE: $GAMEDIR/dxvk.conf
       DXVK_STATE_CACHE_PATH: $GAMEDIR/prefix
@@ -42,6 +40,4 @@ script:
       __GL_SHADER_DISK_CACHE_PATH: $GAMEDIR/prefix
   wine:
     dxvk: true
-    esync: true
-    overrides:
-      nvapi,nvapi64: disabled
+  

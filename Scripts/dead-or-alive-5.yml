@@ -1,0 +1,41 @@
+name: Dead or Alive 5 Last Round
+game_slug: dead-or-alive-5-last-round
+version: Standalone version
+slug: dead-or-alive-5-last-round
+runner: wine
+
+script:
+  files:
+  - setup: N/A:Please select the setup file for Dead or Alive 5 Last Round
+  game:
+    arch: win32
+    exe: $GAMEDIR/drive_c/Games/Dead or Alive 5 - Last Round/game.exe
+    prefix: $GAMEDIR
+  installer:
+  - task:
+      description: Creating Wine prefix
+      name: create_prefix
+      prefix: $GAMEDIR
+  - task:
+      app: qasf wmp10 wmv9vcm quartz devenum
+      name: winetricks
+      prefix: $GAMEDIR
+  - task:
+      arch: win32
+      description: Installing Dead Or Alive Last Round from setup...
+      executable: setup
+      name: wineexec
+      prefix: $GAMEDIR
+  - task:
+      name: winekill
+      prefix: $GAMEDIR
+  system:
+    pulse_latency: true
+    env:
+      __GL_SHADER_DISK_CACHE: 1
+      __GL_SHADER_DISK_CACHE_PATH: $GAMEDIR/prefix
+      __GL_THREADED_OPTIMIZATION: 1
+  wine:
+    dxvk: true
+    esync: false
+    fsync: false

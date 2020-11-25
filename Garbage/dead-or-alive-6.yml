@@ -1,31 +1,28 @@
-name: The Sims 4
-game_slug: the-sims-4
-version: Standalone
-slug: the-sims-4
+name: Dead Or Alive 6
+game_slug: dead-or-alive-6
+version: Standalone version
+slug: dead-or-alive-6
 runner: wine
 
 script:
   files:
-  - setup: N/A:Please select the setup file for The Sims 4
+  - setup: N/A:Please select the setup file for Dead Or Alive 6
   game:
     arch: win64
-    exe: $GAMEDIR/drive_c/Program Files/Electronic Arts/The Sims 4/Game/Bin/TS4_x64.exe
+    exe: $GAMEDIR/drive_c/Games/Dead or Alive 6/DOA6.exe
     prefix: $GAMEDIR
   installer:
   - task:
       description: Creating Wine prefix
       name: create_prefix
       prefix: $GAMEDIR
-  - write_file:
-      content: dxgi.nvapiHack = False
-      file: $GAMEDIR/dxvk.conf
   - task:
-      app: arial cmd d3dcompiler_43 d3dcompiler_47 d3dx9
+      app: cmd d3dcompiler_43
       name: winetricks
       prefix: $GAMEDIR
   - task:
       arch: win64
-      description: Installing The Sims 4 from setup...
+      description: Installing Dead Or Alive 6 from setup...
       executable: setup
       name: wineexec
       prefix: $GAMEDIR
@@ -43,5 +40,3 @@ script:
   wine:
     dxvk: true
     esync: true
-    overrides:
-      nvapi,nvapi64: disabled

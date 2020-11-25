@@ -9,7 +9,7 @@ script:
   - setup: N/A:Please select the setup file for The Sims 3
   game:
     arch: win64
-    exe: drive_c/Program Files (x86)/Electronic Arts/The Sims 3/The Sims 3/Game/Bin/TS3W.exe
+    exe: $GAMEDIR/drive_c/Program Files (x86)/Electronic Arts/The Sims 3/The Sims 3/Game/Bin/TS3W.exe
     prefix: $GAMEDIR
   installer:
   - task:
