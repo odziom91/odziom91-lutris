@@ -17,25 +17,25 @@ The Sims 3
 The Sims 4  
 
 ### Testing:
-Big Mutha Truckers
-Colin McRae Rally (old version)
-FL Studio 20
-Hard Truck 2: King Of The Road
+Big Mutha Truckers  
+Colin McRae Rally (old version)  
+FL Studio 20  
+Hard Truck 2: King Of The Road  
 
 ### Garbage:
-Civilization 6 - not working
+Civilization 6 - not working  
 Dead or Alive 6 - not working  
 FUSER - working intro, freeze on cutscenes  
-Flight Unlimited - menu OK, gameplay with crash
-Play-Fi - not working
+Flight Unlimited - menu OK, gameplay with crash  
+Play-Fi - not working  
 
 ### Generic:
-lutris_wininstall.py - generic script for Windows apps installation (temp. in Polish)
+lutris_wininstall.py - generic script for Windows apps installation (temp. in Polish)  
 
 ## Available tools
-dgVoodoo 2.71.2
-dx8vb
-mf
+dgVoodoo 2.71.2  
+dx8vb  
+mf  
 
 ## Available patches
 Capitalism II - version 1.14
