@@ -1,0 +1,27 @@
+name: "Play-Fi"
+game_slug: play-fi
+version: Standalone
+slug: play-fi
+runner: wine
+
+script:
+  files:
+  - installer: 'N/A:Select the Setup executable:'
+  game:
+    arch: win64
+    exe: $GAMEDIR/drive_c/.
+    prefix: $GAMEDIR
+  installer:
+    - task:
+        arch: win64
+        description: Creating prefix
+        name: create_prefix
+        prefix: $GAMEDIR
+    - task:
+        arch: win64
+        executable: installer
+        name: wineexec
+        prefix: $GAMEDIR
+    - task:
+        name: winekill
+        prefix: $GAMEDIR

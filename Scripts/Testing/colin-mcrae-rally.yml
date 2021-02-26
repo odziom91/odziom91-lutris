@@ -1,0 +1,25 @@
+name: "Colin McRae Rally"
+game_slug: colin-mcrae-rally
+version: Standalone
+slug: colin-mcrae-rally
+runner: wine
+
+script:
+  game:
+    arch: win32
+    exe: $GAMEDIR/drive_c/.
+    prefix: $GAMEDIR
+  installer:
+    - task:
+        arch: win32
+        description: Creating prefix
+        name: create_prefix
+        prefix: $GAMEDIR
+    - task:
+        arch: win32
+        executable: taskmgr.exe
+        name: wineexec
+        prefix: $GAMEDIR
+    - task:
+        name: winekill
+        prefix: $GAMEDIR

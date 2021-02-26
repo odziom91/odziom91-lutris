@@ -1,0 +1,27 @@
+name: "Hard Truck 2: King of the Road"
+game_slug: hard-truck-2--king-of-the-road
+version: Standalone
+slug: hard-truck-2--king-of-the-road
+runner: wine
+
+script:
+  files:
+  - installer: 'N/A:Select the Setup executable:'
+  game:
+    arch: win64
+    exe: $GAMEDIR/drive_c/.
+    prefix: $GAMEDIR
+  installer:
+    - task:
+        arch: win64
+        description: Creating prefix
+        name: create_prefix
+        prefix: $GAMEDIR
+    - task:
+        arch: win64
+        executable: installer
+        name: wineexec
+        prefix: $GAMEDIR
+    - task:
+        name: winekill
+        prefix: $GAMEDIR

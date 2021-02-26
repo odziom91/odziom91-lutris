@@ -1,0 +1,27 @@
+name: Arabian Nights
+gogid: 1423049311
+game_slug: arabian-nights
+version: GOG
+slug: arabian-nights
+runner: wine
+
+script:
+  files:
+  - setup: N/A:Please select the GOG.com Windows installer.
+  game:
+    arch: win64
+    exe: $GAMEDIR/drive_c/GOG Games/Arabian Nights/Launch Arabian Nights.lnk
+    prefix: $GAMEDIR
+  installer:
+  - task:
+      arch: win64
+      name: create_prefix
+      prefix: $GAMEDIR
+  - task:
+      arch: win64
+      args: /SP- /NOCANCEL /SILENT /SUPPRESSMSGBOXES /DIR="C:/GOG Games/Arabian Nights"
+      executable: setup
+      name: wineexec
+      prefix: $GAMEDIR
+  wine:
+    dxvk: true

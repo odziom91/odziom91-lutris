@@ -1,0 +1,28 @@
+name: American McGee Presents - Scrapland
+game_slug: american-mcgee-presents-scrapland
+version: Standalone
+slug: american-mcgee-presents-scrapland
+runner: wine
+
+script:
+  files:
+  - installer: 'N/A:Select the Setup executable from your CD:'
+  game:
+    arch: win64
+    exe: $GAMEDIR/drive_c/Program Files (x86)/Enlight/Scrapland/Scrapland.exe
+    prefix: $GAMEDIR
+  installer:
+  - task:
+      arch: win64
+      description: Creating prefix
+      install_mono: false
+      name: create_prefix
+      prefix: $GAMEDIR
+  - task:
+      arch: win64
+      executable: installer
+      name: wineexec
+      prefix: $GAMEDIR
+  - task:
+      name: winekill
+      prefix: $GAMEDIR

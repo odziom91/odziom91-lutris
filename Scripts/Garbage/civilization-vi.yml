@@ -1,0 +1,35 @@
+name: Sid Meier's Civilization VI
+game_slug: sid-meiers-civilization-vi
+version: Standalone version
+slug: sid-meiers-civilization-vi
+runner: wine
+
+script:
+  files:
+  - setup: N/A:Please select the setup file for Sid Meier's Civilization VI
+  game:
+    arch: win64
+    exe: $GAMEDIR/drive_c/Games/Sid Meier's Civilization 6/Base/Binaries/Win64Steam/CivilizationVI.exe
+    prefix: $GAMEDIR
+  installer:
+  - task:
+      description: Creating Wine prefix
+      name: create_prefix
+      prefix: $GAMEDIR
+  - task:
+      arch: win64
+      description: Installing Sid Meier's Civilization VI from setup...
+      executable: setup
+      name: wineexec
+      prefix: $GAMEDIR
+  - task:
+      name: winekill
+      prefix: $GAMEDIR
+  system:
+    pulse_latency: true
+    env:
+      __GL_SHADER_DISK_CACHE: 1
+      __GL_SHADER_DISK_CACHE_PATH: $GAMEDIR/prefix
+      __GL_THREADED_OPTIMIZATION: 1
+  wine:
+    dxvk: true

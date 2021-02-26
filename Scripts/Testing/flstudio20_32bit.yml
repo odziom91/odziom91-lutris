@@ -1,0 +1,63 @@
+results:
+  - name: FL Studio
+    game_slug: fl-studio
+    version: Standalone
+    slug: fl-studio
+    runner: wine
+
+    script:
+      files:
+        - fl_studio_installer: https://odziomek.pl/flstudio/flstudio_win_20.7.1.1773.exe
+        - fl_studio_patch: https://odziomek.pl/flstudio/fl_patch_installer_20_7_1.exe
+        - fl_studio_shareddll: https://odziomek.pl/flstudio/shareddlls_install.exe
+      game:
+        arch: win32
+        args: start /unix
+        exe: $GAMEDIR/drive_c/Program Files/Image-Line/FL Studio 20/FL.exe
+        working_dir: /mnt/linux/lutris/wine/fl-studio/drive_c/Program Files/Image-Line/FL Studio 20/
+        prefix: $GAMEDIR
+      installer:
+      - task:
+          arch: win32
+          name: create_prefix
+          prefix: $GAMEDIR
+      - task:
+          app: gdiplus arial windowmanagermanaged=y win10
+          arch: win32
+          name: winetricks
+          prefix: $GAMEDIR
+      - task:
+          name: winekill
+          prefix: $GAMEDIR
+      - task:
+          arch: win32
+          executable: fl_studio_shareddll
+          name: wineexec
+          prefix: $GAMEDIR
+      - task:
+          name: winekill
+          prefix: $GAMEDIR
+      - task:
+          arch: win32
+          executable: fl_studio_installer
+          name: wineexec
+          prefix: $GAMEDIR
+      - task:
+          name: winekill
+          prefix: $GAMEDIR
+      - task:
+          arch: win32
+          executable: fl_studio_patch
+          name: wineexec
+          prefix: $GAMEDIR
+      - task:
+          name: winekill
+          prefix: $GAMEDIR
+      system:
+        gamemode: false
+        mangohud: ''
+      wine:
+        dxvk: false
+        overrides:
+          d2d1: disabled
+        version: lutris-6.0-x86_64
